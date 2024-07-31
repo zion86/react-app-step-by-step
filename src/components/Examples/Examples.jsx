@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import TabButton from '../TabButton/TabButton.jsx';
 import Section from '../Section/Section.jsx';
+import Tabs from '../Tabs/Tabs.jsx';
+import TabButton from '../TabButton/TabButton.jsx';
 import { EXAMPLES } from '../../data.js';
 import './Examples.css';
 
 export default function Examples() {
-
   const [ selectedTopic, setSelectedTopic ] = useState(null);
+
   let tabContent = <p>Please select a topic.</p>;
 
   if (selectedTopic) {
@@ -26,15 +27,27 @@ export default function Examples() {
   }
 
   return (
-    <Section title='Examples' className='examples'>
-      <menu>
-        <TabButton isSelected={ selectedTopic === 'components' } onSelect={ () => handleSelect('components') }>Components</TabButton>
-        <TabButton isSelected={ selectedTopic === 'jsx' } onSelect={ () => handleSelect('jsx') }>JSX</TabButton>
-        <TabButton isSelected={ selectedTopic === 'props' } onSelect={ () => handleSelect('props') }>Props</TabButton>
-        <TabButton isSelected={ selectedTopic === 'state' } onSelect={ () => handleSelect('state') }>State</TabButton>
-      </menu>
-      { !selectedTopic && tabContent }
-      { selectedTopic && tabContent }
-    </Section>
+    <Section title='Examples' id='examples'>
+      <Tabs
+        buttonsContainer='menu'
+        buttons={
+          <>
+            <TabButton
+              isSelected={ selectedTopic === 'components' }
+              onClick={ () => handleSelect('components') }>Components</TabButton>
+            <TabButton
+              isSelected={ selectedTopic === 'jsx' }
+              onClick={ () => handleSelect('jsx') }>JSX</TabButton>
+            <TabButton
+              isSelected={ selectedTopic === 'props' }
+              onClick={ () => handleSelect('props') }>Props</TabButton>
+            <TabButton
+              isSelected={ selectedTopic === 'state' }
+              onClick={ () => handleSelect('state') }>State</TabButton>
+          </>
+        }>
+        { tabContent }
+      </Tabs>
+    </Section >
   );
 }
